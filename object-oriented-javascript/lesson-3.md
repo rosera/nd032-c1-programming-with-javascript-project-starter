@@ -8,13 +8,13 @@
 ### Constructor Function
 
 
-#### The `this` Keyword
+### The `this` Keyword
 
 
 ### Setting Our Own `this`
 
 
-#### Prototypal Inheritance
+### Prototypal Inheritance
 
 ### Prototypal Inheritance: Subclasses
 

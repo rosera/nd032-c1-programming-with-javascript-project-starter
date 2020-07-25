@@ -6,11 +6,11 @@
 
 ### Project Rubric
 
-#### Get the Starter Code
+### Get the Starter Code
 
 ### Object-Oriented JavaScript
 
-#### Development Strategy
+### Development Strategy
 
 ### Version Control
 

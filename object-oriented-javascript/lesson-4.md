@@ -8,13 +8,13 @@
 ### Mixins/Extending Object Functions
 
 
-#### Functional Mixins
+### Functional Mixins
 
 
 ### The Module Pattern
 
 
-#### The Revealing Module Pattern
+### The Revealing Module Pattern
 
 ### Lesson Summary
 
