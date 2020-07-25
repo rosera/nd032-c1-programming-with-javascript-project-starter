@@ -5,6 +5,15 @@ The goal of the [Intermediate JavaScript Nanodegree program](https://www.udacity
 
 ## Object Oriented Javascript
 
+| Lesson | Name |
+|--------|------|
+| 1      | [Objects in Depth](https://github.com/rosera/javascript-intermediate/blob/master/object-oriented-javascript/lesson-1.md) |
+| 2      | Functions at Runtime |
+| 3      | Classes and Objects  |
+| 4      | Object-Oriented Design Patterns |
+| 5      | Project: Dinosaurs |
+
+
 Project: Create a user generated infographic
 
 ## Functional Programming
