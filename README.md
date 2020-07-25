@@ -18,7 +18,7 @@ Project: Create a user generated infographic
 
 ## Functional Programming
 
-Project: Create a Mar Rover dashboard
+Project: Create a Mars Rover dashboard
 
 ## Asynchronous Programming in Javascript
 
