@@ -8,10 +8,10 @@ The goal of the [Intermediate JavaScript Nanodegree program](https://www.udacity
 | Lesson | Name |
 |--------|------|
 | 1      | [Objects in Depth](https://github.com/rosera/javascript-intermediate/blob/master/object-oriented-javascript/lesson-1.md) |
-| 2      | Functions at Runtime |
-| 3      | Classes and Objects  |
-| 4      | Object-Oriented Design Patterns |
-| 5      | Project: Dinosaurs |
+| 2      | [Functions at Runtime](https://github.com/rosera/javascript-intermediate/blob/master/object-oriented-javascript/lesson-2.md) |
+| 3      | [Classes and Objects](https://github.com/rosera/javascript-intermediate/blob/master/object-oriented-javascript/lesson-3.md)   |
+| 4      | [Object-Oriented Design Patterns](https://github.com/rosera/javascript-intermediate/blob/master/object-oriented-javascript/lesson-4.md) |
+| 5      | [Project: Dinosaurs](https://github.com/rosera/javascript-intermediate/blob/master/object-oriented-javascript/project-dinosaur.md) |
 
 
 Project: Create a user generated infographic
