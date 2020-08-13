@@ -6,16 +6,16 @@
 
 ### [Project Rubric](https://review.udacity.com/#!/rubrics/2786/view)
 
-#### Code Functionality & UI
+#### 1. Code Functionality & UI
 
 
 
 
-#### Code Quality
+#### 2. Code Quality
 
-#### OOJS Concepts
+#### 3. OOJS Concepts
 
-#### Make your Project Standout
+#### 4. Make your Project Standout
 
 * Validate the form data to ensure the data is acceptable and complete.
 * Allow the user to generate a new infographic.
