@@ -4,9 +4,30 @@
 
 ### Project Summary
 
-### Project Rubric
+### [Project Rubric](https://review.udacity.com/#!/rubrics/2786/view)
 
-### Get the Starter Code
+#### Code Functionality & UI
+
+
+
+
+#### Code Quality
+
+#### OOJS Concepts
+
+#### Make your Project Standout
+
+* Validate the form data to ensure the data is acceptable and complete.
+* Allow the user to generate a new infographic.
+* Move the tile colors from CSS to JS for more control.
+* Randomize the order of the tiles while keeping the human in the middle.
+* Create a hover state on the tiles that displays the rest of the species statistics.
+* Create additional methods for comparing data.
+* Rewrite the project to use [constructor functions, factory functions, the module pattern, and revealing module pattern](https://medium.com/javascript-scene/javascript-factory-functions-vs-constructor-functions-vs-classes-2f22ceddf33e)
+* Allow the user to select different units for the numbers and update the methods to account for this.
+
+
+### [Get the Starter Code](https://github.com/udacity/Javascript)
 
 ### Object-Oriented JavaScript
 
