@@ -59,3 +59,14 @@ Some ideas might be to validate the form data to ensure the data is acceptable a
 ### Version Control
 
 Although not a requirement, we recommend using Git from the very beginning. Make sure to commit often and to use well-formatted commit messages that conform to our Git Style Guide.
+
+
+### Code Snippets
+
+[Load JSON Data from a local file](https://stackoverflow.com/questions/49481934/fetching-local-json)
+
+```
+fetch('./dino.json')
+  .then(res => res.json())
+  .then(data => console.log(data))
+```
