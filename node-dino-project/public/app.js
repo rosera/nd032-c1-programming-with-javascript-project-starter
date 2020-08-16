@@ -64,8 +64,16 @@ function showGridItem(){
   species.textContent = "Hello Changing Text";
 }
 
+function getDinoData(Dinos, species){
 
+ const dinoFilter = Dinos.filter(function(dino){
+   if (dino.species === species){
+     return dino;
+   }
+ });
 
+ return dinoFilter;
+}
 
 // Remove form from screen
 function hideDinoForm() {
