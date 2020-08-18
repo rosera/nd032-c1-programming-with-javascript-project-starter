@@ -41,11 +41,6 @@ function DinoInfo(dino) {
  this.where   = dino.where; 
 }
 
-    // Create Human Object
-
-
-    // Use IIFE to get human data from form
-
 // Get the Form data
 const formData = function getFormData(sapien) {
   // Get the form properties
@@ -78,24 +73,29 @@ function hideDinoForm() {
   // Change the display style to node (i.e. hidden)
   x.style.display = "none";
 }
+
+
+
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
-
-function compareWeight(Dinos, species){
-
- const dinoFilter = Dinos.filter(function(dino){
-   if (dino.species === species){
-     return dino;
-   }
- });
+function compareWeight(dino, myForm) {
+};
 
 
         // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+function compareHeight(dino, myForm ) {
+// Comparisions - weight, height, diet
+ if (dino.height > myForm.height){
+   let heightDiff = dino.height - myForm.height;
+   dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} taller than ${myForm.species}`;
+  }
+  return dino;
+};
 
     
     // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+function compareDiet(dino, myForm){
+};
 
 
     // Generate Tiles for each Dino in Array
@@ -104,27 +104,8 @@ function compareWeight(Dinos, species){
 
         // Add tiles to DOM - render with IDs
 
-// Pass the object and complete the onscreen fields
-function showGridItem(){
-//  columnOne.textContent = "Anklyosaurus";
-//  let dino = dinoData.Dinos[0].species;
-//  columnOne.textContent = dino;
-//  species.textContent = "Hello Changing Text";
-}
-
-// Compare Dinosaur 
-// Diet
-// Height
-// 
-
-
-
-
- return dinoFilter;
-}
 
 function setInfoData(dino, gridItem){
-  
   const species = document.querySelector(gridItem + 'species');
   species.textContent = dino.species;
 
@@ -162,7 +143,6 @@ function buildInfographic(myObjects) {
     <div class="grid-item">
        <h2>${dino.species}</h2>
        <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
-       <h3>${dino.image}</h3>
        <h3>${dino.weight}</h3>
        <h3>${dino.height}</h3>
        <h3>${dino.diet}</h3>
@@ -187,6 +167,7 @@ function DinoInfographic(myObjects){
 }
 
 
+    // Use IIFE to get human data from form
 // Create a constructor
 function objOther(species, weight, height, diet, where, when, fact, image){
   this.species = species;
@@ -236,12 +217,24 @@ dinoFormButton.addEventListener('click', (event) => {
   // Hide the Dino entry form
   hideDinoForm();
 
+    // Create Human Object
+
+
+
   // Create the application objects
   const myObjects = createObjects();
-
   // Set the Human object from the user form
   formData(myObjects[4]);
 
+  // Save the form data for comparison
+  const myForm = myObjects[4];
+
+  let coolInfo = myObjects.map((dino) => {
+     let result = [];
+     result = compareHeight(dino, myForm);
+     return result;
+  });
+
   // Draw the infographic
-  DinoInfographic(myObjects);
+  DinoInfographic(coolInfo);
 })
