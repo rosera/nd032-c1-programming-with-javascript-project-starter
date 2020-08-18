@@ -1,7 +1,9 @@
-# Javascript Intermediate
-## Udacity Nanodegree
+# Udacity Nanodegree: Intermediate JavaScript
+## Title: Intermediate JavaScript
+## Course: nd032
 
 The goal of the [Intermediate JavaScript Nanodegree program](https://www.udacity.com/course/intermediate-javascript-nanodegree--nd032) is to prepare students for roles in web development, server-side application development, and desktop development that require a more advanced set of JavaScript skills. This program will also prepare students with the skills required to use JavaScript frameworks like React, Angular, and Vue.
+[Udacity Blog Post](https://blog.udacity.com/2020/07/introducing-the-intermediate-javascript-nanodegree-program-from-udacity.html)
 
 ## Object Oriented Javascript
 

@@ -36,7 +36,6 @@ p {
 }
 
 /* Grid Styles */
-
 #grid {
     background: #fff url(images/tracks.png) no-repeat;
     background-size: cover;
@@ -46,7 +45,6 @@ p {
     flex-wrap: wrap;
 }
 
-# Class Definition
 .grid-item {
     position: relative;
     box-sizing: border-box;
@@ -95,12 +93,8 @@ p {
     }
 }
 
-.grid-item h2 {
-    font-size: 2em;
-    color: #eee;
-}
 .grid-item h3 {
-    font-size: 1em;
+    font-size: 2em;
     color: #eee;
 }
 
