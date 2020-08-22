@@ -76,25 +76,35 @@ function hideDinoForm() {
 
 
 
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
+// Create Dino Compare Method 1
+// NOTE: Weight in JSON file is in lbs, height in inches. 
 function compareWeight(dino, myForm) {
+// Comparisions - weight, height, diet
+ if (dino.weight > myForm.weight){
+   let weightDiff = dino.weight - myForm.weight;
+   dino.fact = `Heres an interesting fact ${dino.species} is ${weightDiff} heavier than you`;
+  }
+  return dino;
 };
 
 
-        // Create Dino Compare Method 2
+// Create Dino Compare Method 2
 function compareHeight(dino, myForm ) {
 // Comparisions - weight, height, diet
  if (dino.height > myForm.height){
    let heightDiff = dino.height - myForm.height;
-   dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} taller than ${myForm.species}`;
+   dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} taller than you`;
   }
   return dino;
 };
 
     
-    // Create Dino Compare Method 3
+// Create Dino Compare Method 3
 function compareDiet(dino, myForm){
+ if (dino.diet === myForm.diet){
+   dino.fact = `Heres an interesting fact ${dino.species} has the same diet as you`;
+  }
+  return dino;
 };
 
 
@@ -133,34 +143,23 @@ function generateRandomNumber(){
   return Math.floor(Math.random() * 3);     // returns a random integer from 0 to 2
 }
 
-
 // Build the infographic object argument
-function buildInfographic(myObjects) {
-
+function buildInfographic(myObjects, grid){
   // Create a dynamic grid based on an array
   dynamicGrid = myObjects.map((dino) => {
-    return `
-    <div class="grid-item">
-       <h2>${dino.species}</h2>
-       <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
-       <h3>${dino.weight}</h3>
-       <h3>${dino.height}</h3>
-       <h3>${dino.diet}</h3>
-       <h3>${dino.where}</h3>
-       <h3>${dino.when}</h3>
-       <h3>${dino.fact}</h3>
-    </div>
-    `;
+    return `<div class="grid-item"><h2>${dino.species}</h2><img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;"><h3>${dino.weight}</h3><h3>${dino.height}</h3><h3>${dino.diet}</h3> <h3>${dino.where}</h3><h3>${dino.when}</h3><h3>${dino.fact}</h3></div>`; 
   })
 
-  // Return a string
-  return dynamicGrid.toString();
+  // Return a string - use join to remove comma
+  return dynamicGrid.join("");
 };
+
 
 function DinoInfographic(myObjects){
   // Get the grid element
   infographicGrid = document.querySelector('#grid');
-  
+  test = buildInfographic(myObjects, infographicGrid);
+  console.log(test);
   infographicGrid.innerHTML = buildInfographic(myObjects);
 
   console.log("Updated DOM");
@@ -232,6 +231,8 @@ dinoFormButton.addEventListener('click', (event) => {
   let coolInfo = myObjects.map((dino) => {
      let result = [];
      result = compareHeight(dino, myForm);
+     result = compareWeight(dino, myForm);
+     result = compareDiet(dino, myForm);
      return result;
   });
 
