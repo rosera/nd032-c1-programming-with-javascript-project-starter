@@ -91,3 +91,57 @@ const runCallbacksFlat = () => {
     fetchSession("session-id", handleSession)
 }
 ```
+
+
+Example Mock API chaining Error Handling
+
+```
+const mockAPI = (returnValue) => (arg, success, failure) => {
+    setTimeout(() => success(returnValue), 2000)
+}
+
+const fetchSession = mockAPI({ id: "123765" })
+const fetchUser = mockAPI({ firstname: "Bob" })
+const fetchUserFavorites = mockAPI([ "lions", "tigers", "bears" ])
+
+const handleError = error => {
+    // you can put more custom logic here
+    console.log(error)
+}
+
+const runCallbacks = () => {
+    fetchSession("session-id", session => {
+        fetchUser(session, (user) => {
+            fetchUserFavorites(user, (favorites) => {
+                console.log(favorites)
+            }, handleError)
+        }, handleError)
+    }, handleError)
+}
+
+runCallbacks();
+```
+
+[Understanding JavaScript Callbacks and best practices](https://adrianmejia.com/callbacks-concurrency-in-javascript-node/)
+
+What is the purpose of a callback in an asynchronous function
+
+* A callback function is the action to be taken once the asynchronous action completes
+* It is the way for information retrieved or resulting from the asynchronous action to become available for use in the rest of the program.
+* A callback being the event scheduled to happened next, after the asynchronous action is completed.
+
+
+Glossary
+
+| Term | Definition |
+|------|------------|
+| Blocking | A process that blocks the thread even when idle or waiting for a response.|
+| Non-Blocking | A process that, while operating (which might be waiting for a response from an external service), allows the thread to move on and continue executing the program. This pattern is essential for efficient use of a thread. |
+| Asynchronous | For managing a single thread. Synonymous with non-blocking in most cases, but can refer to an entire program whereas a program is not typically referred to as non-blocking. | 
+| Parallel | For multi-threaded programs ( which will not be JavaScript ). Refers to using two or more threads and running separate processes on them simultaneously. | 
+| Concurrent | For multi-threaded programs. Refers to a program that switches between multiple operations. Appears to do many things at once while only operating on one thread at a time. |
+| Thread | Where computers do work. Can also be thought of as a single process. Can do one thing at a time, works linearly through a block of code. |
+| Single Threaded | Meaning a program can only run on one thread. JavaScript will almost always be single threaded. |
+| Multi Threaded | Some languages have the ability to spin up new threads and manage work across multiple threads. Work that takes place across multiple threads is called multi-threaded |
+| Callback Hell | Long chains of callbacks that end up in an increasingly indented spiral.| 
+
