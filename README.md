@@ -42,17 +42,6 @@ Resources:
 
 Project: Build a UDACIRACER Simulator game
 
-What is the difference between Asynchronous and Parallel programming?
-
-* Asynchronous is for single-threaded programs and is concerned with using non-blocking code to make the most efficient use of a single thread as possible.
-* Parallel is a means of managing multi-threaded programs in which tasks are split between completely separate threads and execute simultaneously.
-
-In your own words, explain the difference between blocking and non-blocking code. You might use an example from life or a tech example like an API request.
-* blocking task stopping all progress in a set of steps
-* process moving past non-blocking task that had moved work somewhere else
-* a blocking task stopping all progress in a set of steps
-* a process moving past non-blocking task that had moved work somewhere else
-
 
 Example Mock API chaining
 
@@ -226,3 +215,108 @@ const runPromises = () => {
         .catch(error => console.log("oops!"));
 };
 ```
+
+#### Fetch with Promises
+
+GET Request
+```
+// Note that we have to use a Node package called node-fetch to use fetch on the backend
+const fetch = require('node-fetch');
+
+// GET
+fetch('http://localhost:8080')
+.then(response => response.json())
+.then(json => console.log(json))
+.catch(error => console.log(error));
+```
+
+POST Request
+```
+// Note that we have to use a Node package called node-fetch to use fetch on the backend
+const fetch = require('node-fetch');
+
+// POST
+fetch('https://url-with-desired-data', {
+    method: 'POST', // Other options: PUT, PATCH, DELETE
+    mode: 'cors', // Other options are: 'no-cors', 'same-origin', and the default: 'cors'
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: {"data": "This is json"} // body data type must match "Content-Type" header
+  })
+.then(response => response.json())
+.catch(error => console.log(error))
+```
+
+Fetch Examples for Request Verbs
+```
+// Create a GET request to http://localhost:3000
+
+fetch('http://localhost:3000')
+.then(response => response.json())
+.then(response => console.log(response))
+.catch(error => console.log(error))
+
+
+// Create a POST request to http://localhost:3000
+const postData = { name: "Alyssa" }
+fetch('http://localhost:3000', {
+    method: 'POST', 
+    mode: 'cors', 
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(postData)
+})
+.then(response => response.json())
+.then(response => console.log(response))
+.catch(error => console.log(error))
+
+
+// Create a PUT request to http://localhost:3000
+const putData = { name: "Alyssa" }
+fetch('http://localhost:3000', {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(putData)
+})
+.then(response => response.json())
+.then(response => console.log(response))
+.catch(error => console.log(error))
+
+
+// Create a DELETE request to http://localhost:3000
+
+const deleteData = { name: "Alyssa" }
+fetch('http://localhost:3000', {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(deleteData)
+})
+.then(response => response.json())
+.then(response => console.log(response))
+.catch(error => console.log(error))
+```
+
+
+#### Interview Questions
+
+What is the difference between Asynchronous and Parallel programming?
+
+* Asynchronous is for single-threaded programs and is concerned with using non-blocking code to make the most efficient use of a single thread as possible.
+* Parallel is a means of managing multi-threaded programs in which tasks are split between completely separate threads and execute simultaneously.
+
+In your own words, explain the difference between blocking and non-blocking code. You might use an example from life or a tech example like an API request.
+* blocking task stopping all progress in a set of steps
+* process moving past non-blocking task that had moved work somewhere else
+* a blocking task stopping all progress in a set of steps
+* a process moving past non-blocking task that had moved work somewhere else
+
+What are the advantages of using Promises over Callbacks?
+* Promises allow for cleaner syntax in long asynchronous flows Promises avoid callback hell Promises more explicit error handling Promise states make it easier to control the entire timeline of an asynchronous flow
