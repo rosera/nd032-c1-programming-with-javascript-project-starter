@@ -131,7 +131,7 @@ What is the purpose of a callback in an asynchronous function
 * A callback being the event scheduled to happened next, after the asynchronous action is completed.
 
 
-Glossary
+#### Glossary
 
 | Term | Definition |
 |------|------------|
@@ -145,3 +145,7 @@ Glossary
 | Multi Threaded | Some languages have the ability to spin up new threads and manage work across multiple threads. Work that takes place across multiple threads is called multi-threaded |
 | Callback Hell | Long chains of callbacks that end up in an increasingly indented spiral.| 
 
+
+#### JavaScript Promise States
+
+![JavaScript Promise States](https://github.com/rosera/javascript-intermediate/blob/master/images/javascript-promise-states.png?raw=true)
