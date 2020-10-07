@@ -305,6 +305,93 @@ fetch('http://localhost:3000', {
 ```
 
 
+#### Promise.allSettled
+
+* Promise.allSettled not supported in all browsers
+* Requires Node.js > 12.9.0
+
+```
+const book1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 3000, "Enders Game");
+});
+
+const book2 = new Promise((resolve, reject) => {
+    setTimeout(reject, 4000, "Sorry, not available!");
+});
+
+const book3 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 2000, "Harry Potter and The Prisoner of Azkaban");
+});
+
+const book4 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 1000, "Stranger in a Strange Land");
+});
+
+Promise.allSettled([book1, book2, book3, book4])
+.then(results => {
+    console.log(results)
+    results.forEach(result => console.log(result.value))
+})
+.catch(error => console.log(error));
+```
+
+#### Promise.all
+
+This method is almost exactly the same time as Promise.allSettled except for what it returns and how it handles rejected Promises. It takes in an array of Promises and waits for them to resolve, but the first time it encounters a rejected Promise, it stops waiting for any further Promises and runs its catch clause. If no Promises reject, it returns an array of the values returned by them. Again like Promise.allSettled, Promise.all returns a Promise, so the resulting array is available in the following then.
+
+```
+const book1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 3000, "Enders Game");
+});
+
+const book2 = new Promise((resolve, reject) => {
+    setTimeout(reject, 4000, "Sorry, not available!");
+});
+
+const book3 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 2000, "Harry Potter and The Prisoner of Azkaban");
+});
+
+const book4 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 1000, "Stranger in a Strange Land");
+});
+
+Promise.all([book1, book2, book3, book4])
+.then(results => {
+    console.log(results);
+    results.forEach(result => console.log(result.value));
+})
+.catch(error => console.log(error));
+```
+
+#### Promise.Race
+
+Promise.race also takes an argument of an array of Promises, but instead of waiting for them all to resolve, it only waits for the fastest one. Whatever Promise fulfills first, whether is resolves or rejects. It will pass the value from the resolution or the error from the rejection to its then statement.
+
+```
+const book1 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 3000, "Enders Game");
+});
+
+const book2 = new Promise((resolve, reject) => {
+    setTimeout(reject, 4000, "Sorry, not available!");
+});
+
+const book3 = new Promise((resolve, reject) => {
+    setTimeout(resolve, 2000, "Harry Potter and The Prisoner of Azkaban");
+});
+
+const book4 = new Promise((resolve, reject) => {
+    setTimeout(reject, 1000, "Sorry, not available!");
+});
+
+Promise.race([book1, book2, book3, book4])
+.then(result => {
+    console.log(result);
+})
+.catch(error => console.log("Error!", error));
+```
+
 #### Interview Questions
 
 What is the difference between Asynchronous and Parallel programming?
@@ -320,3 +407,15 @@ In your own words, explain the difference between blocking and non-blocking code
 
 What are the advantages of using Promises over Callbacks?
 * Promises allow for cleaner syntax in long asynchronous flows Promises avoid callback hell Promises more explicit error handling Promise states make it easier to control the entire timeline of an asynchronous flow
+
+
+Explain the purpose of the finally clause in Promises.
+* Finally runs after either the final .then or .catch
+* Finally is for logic that you want to run in either the resolve or reject case
+* It is optional and should only be added if you have a reason to use it
+
+Name one Promise method for handling multiple Promises and give one use case for when you might need it.
+
+* Promise.All You need information from multiple sources and you expect them all to resolve. You can use this in any case where it would be considered an error for any of the Promises to reject.
+* Promise.AllSettled You need to make many requests and get an overview of which requests failed or succeeded, for instance if you need to poll multiple resources to which are available.
+* Promise.Race You only care about the fastest of a set of Promises. If you are building a timeout or a request that is time sensitive and not important after a certain amount of time, this would be the method to use.
