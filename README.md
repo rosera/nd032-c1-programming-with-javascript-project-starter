@@ -149,3 +149,80 @@ What is the purpose of a callback in an asynchronous function
 #### JavaScript Promise States
 
 ![JavaScript Promise States](https://github.com/rosera/javascript-intermediate/blob/master/images/javascript-promise-states.png?raw=true)
+
+#### Promise Chaining
+
+* then() clause will alway run in linear order
+* multiple then() clauses can be used
+* data returned used as the argument to next then()
+* An error will stop the chain and execute the catch()
+
+```
+// ---------------- PROMISE CHAINING WITH DATA & ERRORS 
+new Promise((resolve, reject) => {
+    alert('A')
+    resolve(['B', 'C', 'D']);
+    // reject();
+})
+.then((data) => {
+    // throw new Error('Error at B');
+    alert(data.shift());
+    return data;
+})
+.then((data) => {
+    throw new Error('Error at C');
+    alert(data.shift());
+    return data
+})
+.then((data) => {
+    // throw new Error('Error at D');
+    alert(data.shift());
+    return data
+})
+.catch((error) => {
+    console.log(error)
+    alert(error);
+})
+```
+
+#### Revisit the Mock API example using Promises
+
+Callback version
+```
+const mockAPI = (returnValue) => (arg, cb) => {
+    setTimeout(() => cb(returnValue), 2000);
+};
+
+const fetchSession = mockAPI({ id: "123765" });
+const fetchUser = mockAPI({ firstname: "Bob" });
+const fetchUserFavorites = mockAPI([ "lions", "tigers", "bears" ]);
+
+const runCallbacks = () => {
+    fetchSession("session-id", (session) => {
+        fetchUser(session, (user) => {
+            fetchUserFavorites(user, (favorites) => {
+                console.log(favorites);
+            });
+        });
+    });
+};
+```
+
+Promise version
+```
+const mockAPI = (returnValue) => (arg, cb) => {
+    setTimeout(() => cb(returnValue), 2000);
+};
+
+const fetchSession = mockAPI({ id: "123765" });
+const fetchUser = mockAPI({ firstname: "Bob" });
+const fetchUserFavorites = mockAPI([ "lions", "tigers", "bears" ]);
+
+const runPromises = () => {
+    return fetchSession("session-id")
+        .then(session => fetchUser(session))
+        .then(user => fetchUserFavorites(user))
+        .then(favorites => console.log(favorites))
+        .catch(error => console.log("oops!"));
+};
+```
