@@ -133,6 +133,7 @@ What is the purpose of a callback in an asynchronous function
 | Single Threaded | Meaning a program can only run on one thread. JavaScript will almost always be single threaded. |
 | Multi Threaded | Some languages have the ability to spin up new threads and manage work across multiple threads. Work that takes place across multiple threads is called multi-threaded |
 | Callback Hell | Long chains of callbacks that end up in an increasingly indented spiral.| 
+| Exception Handling |Exception handling means writing code that expects errors to occur and handles them gracefully. Programs with good exception handling can handle errors without crashing or becoming unusable, and instead give their users and developers helpful insight into what went wrong. |
 
 
 #### JavaScript Promise States
@@ -392,6 +393,155 @@ Promise.race([book1, book2, book3, book4])
 .catch(error => console.log("Error!", error));
 ```
 
+#### Try/Catch
+
+```
+try {
+   // undeclared variable being used in an operation causes an error
+   foo/2
+} catch (err) {
+   console.error(err.message);
+} finally {
+   console.log('I run last');
+}
+```
+
+Try statement: Use the it with MAP
+
+```
+const printStatusMessage = (status) => {
+    try {
+        const animalsList = animalsByConservationStatus(status);
+        let names = animalsList.map(animal => animal.common_name);
+        message = `Animals listed as ${status} are: ${names.join(', ')}`;
+        console.log(message);
+    } catch(error) {
+        console.error(error);
+        console.log(`There are no animals with status: ${status}`);
+    };
+};
+
+printStatusMessage("critical");
+printStatusMessage("extinct");
+```
+
+Catch Statement: Check if items exist in a list
+```
+endangeredAnimals = ["saola", "green turtle", "amur leopard", "deer"];
+
+const printAnimalMessage = (animal) => {
+    try {
+        const info = fetchAnimalByName(animal);
+        const message = `The ${info.common_name} is ${info.conservation_status} on the endangered list`;
+        console.log(message);
+    } catch(error) {
+        console.error(`There was a problem fetching: ${animal}`);
+    };
+};
+
+endangeredAnimals.forEach(animal => printAnimalMessage(animal));
+```
+
+Finally Statement: Display a message for all animals whether found or not
+
+```
+animal1 = "vaquita";
+animal2 = "mouse";
+
+const printAnimalFacts = (animal) => {
+    try {
+        const info = fetchAnimalByName(animal);
+        const message = `The ${info.common_name} (${info.species}) is an endangered animal with ${info.population !== null ? info.population : "an unkown number of"} individuals in the wild in their home region of ${info.region}`;
+        console.log(message);
+    } catch(error) {
+        console.error(error)
+    } finally {
+        console.log(`The ${animal} was searched.`)
+    }
+};
+
+printAnimalFacts(animal1);
+printAnimalFacts(animal2);
+```
+
+#### Async/Await
+
+You should use Async/Await when:
+* The results from multiple Promises will be used together.
+* You need perform a lot of logic after one or multiple Promises resolve
+* Logic in a synchronous-style function would be cleaner than in a .then chain (this is mostly personal preference)
+
+You shouldn't use Async/Await if:
+* You don't need to use the await word in the function
+* You just want the function to return a promise (instead use Promise.new from the promises lesson)
+
+Think carefully about using Async/Await because:
+* It will change the output of the function. If other parts of the program rely on the output of that function, changing it to async will have unexpected consequences
+
+Example using Promises
+```
+const mockAPI = (returnValue) => (arg, cb) => {
+    setTimeout(() => cb(returnValue), 2000);
+};
+
+const fetchSession = mockAPI({ id: "123765" });
+const fetchUser = mockAPI({ firstname: "Bob" });
+const fetchUserFavorites = mockAPI([ "lions", "tigers", "bears" ]);
+
+const runPromises = () => {
+    return fetchSession("session-id")
+        .then(session => fetchUser(session))
+        .then(user => fetchUserFavorites(user))
+        .then(favorites => console.log(favorites))
+        .catch(error => console.log("oops!"));
+};
+```
+
+Example using Async/Await
+```
+const mockAPI = (returnValue) => (arg, cb) => {
+    setTimeout(() => cb(returnValue), 2000);
+};
+
+const fetchSession = mockAPI({ id: "123765" });
+const fetchUser = mockAPI({ firstname: "Bob" });
+const fetchUserFavorites = mockAPI([ "lions", "tigers", "bears" ]);
+
+const runAsync = async () => {
+    try {
+        const session = await fetchSession("session-id");
+        const user = await fetchUser(session);
+        const favorites = await fetchUserFavorites(user);
+        console.log(favorites);
+    } catch (error) {
+        console.log("oops!");
+    }
+}
+```
+
+Async
+
+// arrow function example
+```
+const myAsyncFunction = async ( ) => {
+  // ...
+};
+```
+
+// named function example
+```
+async function myAsyncFunction() {
+  // ...
+};
+```
+
+Await
+```
+const myAsyncFunction = async ( ) => {
+    const myVal = await promise1();
+};
+```
+
 #### Interview Questions
 
 What is the difference between Asynchronous and Parallel programming?
@@ -419,3 +569,9 @@ Name one Promise method for handling multiple Promises and give one use case for
 * Promise.All You need information from multiple sources and you expect them all to resolve. You can use this in any case where it would be considered an error for any of the Promises to reject.
 * Promise.AllSettled You need to make many requests and get an overview of which requests failed or succeeded, for instance if you need to poll multiple resources to which are available.
 * Promise.Race You only care about the fastest of a set of Promises. If you are building a timeout or a request that is time sensitive and not important after a certain amount of time, this would be the method to use.
+
+
+Explain when you would use Async/await in JavaScript.
+* doing an action that requires using the results of many Promises.
+* doing an action with many Promises and it does not fit to use the Promise methods like Promise.all or Promise.race.
+* you are working the result value of a Promise, and not a pending Promise object.
