@@ -1,6 +1,5 @@
 const dinoFormButton = document.querySelector('#btn'); // Btn element
-//const columnOne = document.querySelector('#C1')
-//const species = document.querySelector('#species')
+let name = '';
 const factor = 12;
 let dinoData;
   
@@ -29,7 +28,7 @@ const dinoTemplate = {
 }
 
 
-    // Create Dino Objects
+// Create Dino Objects
 // For each dinoData - create a Dinosaur object
 function DinoInfo(dino) {
  this.species = dino.species;
@@ -44,7 +43,7 @@ function DinoInfo(dino) {
 // Get the Form data
 const formData = function getFormData(sapien) {
   // Get the form properties
-  const name = document.querySelector('#name').value;
+  name = document.querySelector('#name').value;
   sapien.species = name;
   
   // Height - Feet
@@ -80,7 +79,7 @@ function hideDinoForm() {
 // NOTE: Weight in JSON file is in lbs, height in inches. 
 function compareWeight(dino, myForm) {
 // Comparisions - weight, height, diet
- if (dino.weight > myForm.weight){
+ if (dino.weight > myForm.weight && dino.species !== name){
    let weightDiff = dino.weight - myForm.weight;
    dino.fact = `Heres an interesting fact ${dino.species} is ${weightDiff} heavier than you`;
   }
@@ -91,7 +90,7 @@ function compareWeight(dino, myForm) {
 // Create Dino Compare Method 2
 function compareHeight(dino, myForm ) {
 // Comparisions - weight, height, diet
- if (dino.height > myForm.height){
+ if (dino.height > myForm.height && dino.species !== name){
    let heightDiff = dino.height - myForm.height;
    dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} taller than you`;
   }
@@ -101,18 +100,18 @@ function compareHeight(dino, myForm ) {
     
 // Create Dino Compare Method 3
 function compareDiet(dino, myForm){
- if (dino.diet === myForm.diet){
+ if (dino.diet === myForm.diet && dino.species !== name){
    dino.fact = `Heres an interesting fact ${dino.species} has the same diet as you`;
   }
   return dino;
 };
 
 
-    // Generate Tiles for each Dino in Array
+// Generate Tiles for each Dino in Array
 
-    // Use a Map to generate the Tile content
+// Use a Map to generate the Tile content
 
-        // Add tiles to DOM - render with IDs
+// Add tiles to DOM - render with IDs
 
 
 function setInfoData(dino, gridItem){
@@ -147,7 +146,33 @@ function generateRandomNumber(){
 function buildInfographic(myObjects, grid){
   // Create a dynamic grid based on an array
   dynamicGrid = myObjects.map((dino) => {
-    return `<div class="grid-item"><h2>${dino.species}</h2><img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;"><h3>${dino.weight}</h3><h3>${dino.height}</h3><h3>${dino.diet}</h3> <h3>${dino.where}</h3><h3>${dino.when}</h3><h3>${dino.fact}</h3></div>`; 
+    if (dino.species === name){
+      return `
+      <div class="grid-item">
+        <h3>${dino.species}</h3>
+        <h4>${dino.fact}</h4>
+        <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
+        <ul>
+          <li>Weight: ${dino.weight}</li>
+          <li>Height: ${dino.height}</li>
+          <li>Diet: ${dino.diet}</li>
+        <ul>
+      </div>`; 
+    } else {
+    return `
+      <div class="grid-item">
+        <h3>${dino.species}</h3>
+        <h4>${dino.fact}</h4>
+        <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
+        <ul>
+          <li>Weight: ${dino.weight}</li>
+          <li>Height: ${dino.height}</li>
+          <li>Diet: ${dino.diet}</li>
+          <li>Where: ${dino.where}</li>
+          <li>When: ${dino.when}</li>
+        <ul>
+      </div>`;
+    }
   })
 
   // Return a string - use join to remove comma
@@ -159,10 +184,7 @@ function DinoInfographic(myObjects){
   // Get the grid element
   infographicGrid = document.querySelector('#grid');
   test = buildInfographic(myObjects, infographicGrid);
-  console.log(test);
   infographicGrid.innerHTML = buildInfographic(myObjects);
-
-  console.log("Updated DOM");
 }
 
 
@@ -215,10 +237,6 @@ function createObjects(){
 dinoFormButton.addEventListener('click', (event) => {
   // Hide the Dino entry form
   hideDinoForm();
-
-    // Create Human Object
-
-
 
   // Create the application objects
   const myObjects = createObjects();
