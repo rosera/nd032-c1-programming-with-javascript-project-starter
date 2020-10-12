@@ -245,12 +245,21 @@ dinoFormButton.addEventListener('click', (event) => {
 
   // Save the form data for comparison
   const myForm = myObjects[4];
+  let number = generateRandomNumber();
 
   let coolInfo = myObjects.map((dino) => {
      let result = [];
-     result = compareHeight(dino, myForm);
-     result = compareWeight(dino, myForm);
-     result = compareDiet(dino, myForm);
+     switch(number){
+       case 0:
+         result = compareHeight(dino, myForm);
+         break;
+       case 1:   
+         result = compareWeight(dino, myForm);
+         break;
+       case 2:         
+         result = compareDiet(dino, myForm);
+         break;
+     }
      return result;
   });
 
