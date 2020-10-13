@@ -163,7 +163,6 @@ function buildInfographic(myObjects, grid){
       return `
       <div class="grid-item">
         <h3>${dino.species}</h3>
-        <h4>${dino.fact}</h4>
         <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
       </div>`; 
     } else {
