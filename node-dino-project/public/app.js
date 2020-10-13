@@ -78,10 +78,14 @@ function hideDinoForm() {
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches. 
 function compareWeight(dino, myForm) {
-// Comparisions - weight, height, diet
- if (dino.weight > myForm.weight && dino.species !== name){
-   let weightDiff = dino.weight - myForm.weight;
-   dino.fact = `Heres an interesting fact ${dino.species} is ${weightDiff} heavier than you`;
+  // Comparisions - weight, height, diet
+  if (dino.weight >= myForm.weight && dino.species !== name){
+    let weightDiff = dino.weight - myForm.weight;
+    dino.fact = `Heres an interesting fact ${dino.species} is ${weightDiff} Lbs heavier than you`;
+  } else
+  {
+    let weightDiff = myForm.weight - dino.weight;
+    dino.fact = `Heres an interesting fact ${dino.species} is ${weightDiff} Lbs lighter than you`;
   }
   return dino;
 };
@@ -89,20 +93,29 @@ function compareWeight(dino, myForm) {
 
 // Create Dino Compare Method 2
 function compareHeight(dino, myForm ) {
-// Comparisions - weight, height, diet
- if (dino.height > myForm.height && dino.species !== name){
-   let heightDiff = dino.height - myForm.height;
-   dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} taller than you`;
+  // Comparisions - weight, height, diet
+  if (dino.height >= myForm.height && dino.species !== name){
+    let heightDiff = dino.height - myForm.height;
+    dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} Feet taller than you`;
+  } else 
+  {
+    let heightDiff = myForm.height - dino.height;
+    dino.fact = `Heres an interesting fact ${dino.species} is ${heightDiff} Feet shorter than you`;
   }
+
   return dino;
 };
 
     
 // Create Dino Compare Method 3
 function compareDiet(dino, myForm){
- if (dino.diet === myForm.diet && dino.species !== name){
-   dino.fact = `Heres an interesting fact ${dino.species} has the same diet as you`;
+  if (dino.diet === myForm.diet && dino.species !== name){
+    dino.fact = `Heres an interesting fact ${dino.species} has the same diet as you`;
+  } else
+  {
+    dino.fact = `Heres an interesting fact ${dino.species} doesnt have the same diet as you`;
   }
+  
   return dino;
 };
 
