@@ -165,6 +165,32 @@ function buildInfographic(myObjects, grid){
         <h3>${dino.species}</h3>
         <h4>${dino.fact}</h4>
         <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
+      </div>`; 
+    } else {
+    return `
+      <div class="grid-item">
+        <h3>${dino.species}</h3>
+        <h4>${dino.fact}</h4>
+        <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
+      </div>`;
+    }
+  })
+
+  // Return a string - use join to remove comma
+  return dynamicGrid.join("");
+};
+
+
+// Build the infographic object argument
+function buildInfographic2(myObjects, grid){
+  // Create a dynamic grid based on an array
+  dynamicGrid = myObjects.map((dino) => {
+    if (dino.species === name){
+      return `
+      <div class="grid-item">
+        <h3>${dino.species}</h3>
+        <h4>${dino.fact}</h4>
+        <img src="/images/${dino.image}" alt="${dino.species}" style="width:250px;height=250px;">
         <ul>
           <li>Weight: ${dino.weight}</li>
           <li>Height: ${dino.height}</li>
@@ -191,8 +217,6 @@ function buildInfographic(myObjects, grid){
   // Return a string - use join to remove comma
   return dynamicGrid.join("");
 };
-
-
 function DinoInfographic(myObjects){
   // Get the grid element
   infographicGrid = document.querySelector('#grid');
@@ -258,9 +282,9 @@ dinoFormButton.addEventListener('click', (event) => {
 
   // Save the form data for comparison
   const myForm = myObjects[4];
-  let number = generateRandomNumber();
 
   let coolInfo = myObjects.map((dino) => {
+     let number = generateRandomNumber();
      let result = [];
      switch(number){
        case 0:
