@@ -300,6 +300,10 @@ dinoFormButton.addEventListener('click', (event) => {
      return result;
   });
 
+  
+  // Reset Pidgeon fact
+  coolInfo[8].fact = "All birds are Dinosaurs."
+
   // Draw the infographic
   DinoInfographic(coolInfo);
 })
